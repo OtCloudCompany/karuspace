@@ -1,0 +1,24 @@
+<div class="container my-4">
+  <h2 class="mb-3">Legacy Usage Statistics</h2>
+  
+  <!-- Navigation Menu -->
+  <ul class="nav nav-pills mb-4 pb-2" style="flex-wrap: wrap; gap: 0.25rem; border-bottom: 1px solid #dee2e6;">
+    @for (report of reports; track report.filename) {
+      <li class="nav-item">
+        <button class="nav-link px-2 py-1" 
+           style="border: 1px solid transparent; font-size: 0.9rem;"
+           [class.active]="selectedReport?.filename === report.filename"
+           (click)="selectReport(report)">
+          {{ report.label }}
+        </button>
+      </li>
+    }
+  </ul>
+
+  <!-- iframe section -->
+  <div class="report-container w-100 border rounded bg-white" style="min-height: 600px;">
+    @if (selectedReportUrl) {
+      <iframe [src]="selectedReportUrl" width="100%" frameborder="0" style="border: none;" scrolling="no" (load)="onIframeLoad($event)"></iframe>
+    }
+  </div>
+</div>

@@ -1,0 +1,200 @@
+@if (showBackButton$ | async) {
+<ds-results-back-button [back]="back"></ds-results-back-button>
+}
+<div class="flex-row person-title">
+    <ds-item-page-title-field class="me-auto" [item]="object">
+    </ds-item-page-title-field>
+    <ds-dso-edit-menu></ds-dso-edit-menu>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-md-3 bg-light py-3">
+
+        <div class="card profile-image mb-3">
+            <!-- @if (!(mediaViewer.image || mediaViewer.video)) { -->
+            <ds-metadata-field-wrapper [hideIfNoTextContent]="false">
+                <ds-thumbnail [thumbnail]="object?.thumbnail | async" [limitWidth]="false"></ds-thumbnail>
+            </ds-metadata-field-wrapper>
+            <!-- } -->
+            <div class="card-footer pb-0 text-center">
+                @if (object.hasMetadata(['person.familyName'])) {
+                <div class="font-weight-bold">
+                    @if (object.hasMetadata(['person.salutation'])) {
+                    <span>
+                        {{ object.firstMetadataValue(['person.salutation']) | dsCapitalize }}
+                    </span>
+                    }
+                    <span>{{ fullName }}</span>
+                </div>
+                }
+                @if (object.hasMetadata(['person.jobTitle'])) {
+                <div class="mb-2">
+                    <span>
+                        <strong>{{ object.firstMetadataValue(['person.jobTitle']) }}</strong>
+                    </span>
+                </div>
+                }
+            </div>
+        </div>
+        <div class="card mb-3">
+            <div class="card-header">
+                <h4 class="card-title mb-0">{{ 'item.page.person.shareProfile' | translate }}</h4>
+            </div>
+            <div class="card-body">
+                <nav class="nav d-flex flex-row justify-content-between">
+                    <a class="nav-link" [href]="shareLinks.twitter" title="Share on X">
+                        <i class="fab fa-x-twitter fa-xl text-karu-green"></i>
+                    </a>
+                    <a class="nav-link" [href]="shareLinks.linkedin">
+                        <i class="fab fa-linkedin fa-xl text-karu-green" title="Share on LinkedIn"></i>
+                    </a>
+                    <a class="nav-link" [href]="shareLinks.facebook" title="Share on Facebook">
+                        <i class="fab fa-facebook-square fa-xl text-karu-green"></i>
+                    </a>
+                    <a class="nav-link" [href]="shareLinks.email" title="Share via Email">
+                        <i class="fas fa-envelope fa-xl text-karu-green"></i>
+                    </a>
+                </nav>
+            </div>
+        </div>
+        <div class="d-grid gap-2">
+            <a class="btn btn-outline-primary btn-" [routerLink]="[itemPageRoute + '/full']" role="button" tabindex="0">
+                {{"item.page.link.full" | translate}}
+            </a>
+        </div>
+    </div>
+    <!-- <div class="col-xs-12 col-md-1 "></div> -->
+    <div class="col-xs-12 col-md-9">
+        @if (object?.firstMetadataValue('person.shortBio'); as shortBio) {
+        <div class="abstract-field simple-view-element mb-4">
+            <ds-truncatable [showToggle]="true" [id]="'bioOuter'">
+                <h5 class="simple-view-element-header">{{ 'item.page.person.shortBio' | translate }}</h5>
+                <div class="justify-content-end mb-4 itempage-abstract">
+                    <ds-truncatable-part [minLines]="4" [id]="'bioOuter'">
+                        {{ shortBio | stripLineBreaks }}
+                    </ds-truncatable-part>
+                </div>
+            </ds-truncatable>
+        </div>
+        }
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <tbody>
+                    @if (object.hasMetadata(['person.jobTitle'])) {
+                    <tr>
+                        <td>{{ 'item.page.person.jobTitle' | translate }}</td>
+                        <td>{{ object.firstMetadataValue(['person.jobTitle']) }}</td>
+                    </tr>
+                    }
+                    @if (object.hasMetadata(['person.affiliation.institutionName'])) {
+                    <tr>
+                        <td>{{ 'item.page.person.affiliation.institutionName' | translate }}</td>
+                        <td>{{ object.firstMetadataValue(['person.affiliation.institutionName']) }}</td>
+                    </tr>
+                    }
+                    @if (object.hasMetadata(['person.affiliation.faculty'])) {
+                    <tr>
+                        <td>{{ 'item.page.person.affiliation.faculty' | translate }}</td>
+                        <td>{{ object.firstMetadataValue(['person.affiliation.faculty']) }}</td>
+                    </tr>
+                    }
+                    @if (object.hasMetadata(['person.affiliation.department'])) {
+                    <tr>
+                        <td>{{ 'item.page.person.affiliation.department' | translate }}</td>
+                        <td>{{ object.firstMetadataValue(['person.affiliation.department']) }}</td>
+                    </tr>
+                    }
+                    @if (object.hasMetadata(['person.specialty'])) {
+                    <tr>
+                        <td>{{ 'item.page.person.specialty' | translate }}</td>
+                        <td>{{ object.firstMetadataValue(['person.specialty']) }}</td>
+                    </tr>
+                    }
+                    @if (object.hasMetadata(['person.academicQualification'])) {
+                    <tr>
+                        <td>{{ 'item.page.person.academicQualifications' | translate }}</td>
+                        <td>
+                            @for (academicQualification of object.allMetadataValues(['person.academicQualification']);
+                            track $index; let last = $last) {
+                            <span class="">{{ academicQualification }}</span>
+                            @if (!last) { <br /> }
+                            }
+                        </td>
+                    </tr>
+                    }
+                    @if (object.hasMetadata(['person.identifier.gsid'])) {
+                    <tr>
+                        <td>{{ 'item.page.person.identifier.gsid' | translate }}</td>
+                        <td>
+                            <a [href]="object.firstMetadataValue(['person.identifier.gsid'])" target="_blank">
+                                {{ object.firstMetadataValue(['person.identifier.gsid']) }}
+                            </a>
+                        </td>
+                    </tr>
+                    }
+                    @if (object.hasMetadata(['person.identifier.orcid'])) {
+                    <tr>
+                        <td>{{ 'item.page.person.identifier.orcid' | translate }}</td>
+                        <td>
+                            <a [href]="object.firstMetadataValue(['person.identifier.orcid'])" target="_blank">
+                                {{ object.firstMetadataValue(['person.identifier.orcid']) }}
+                            </a>
+                        </td>
+                    </tr>
+                    }
+                    @if (object.hasMetadata(['person.identifier.isni'])) {
+                    <tr>
+                        <td>{{ 'item.page.person.identifier.isni' | translate }}</td>
+                        <td>
+                            {{ object.firstMetadataValue(['person.identifier.isni']) }}
+                        </td>
+                    </tr>
+                    }
+                    @if (object.hasMetadata(['dc.identifier.uri'])) {
+                    <tr>
+                        <td>{{ 'item.page.person.identifier.uri' | translate }}</td>
+                        <td><a [href]="handleIdentifier">{{ handleIdentifier }}</a></td>
+                    </tr>
+                    }
+                    @if (object.hasMetadata(['person.knowsLanguage'])) {
+                    <tr>
+                        <td>{{ 'item.page.person.knowsLanguage' | translate }}</td>
+                        <td>
+                            @for (knownLanguage of object.allMetadataValues(['person.knowsLanguage']);
+                            track $index; let last = $last) {
+                            <span class="badge badge-pill bg-karu-orange mx-1">{{ getLanguageName(knownLanguage)
+                                }}</span>
+                            @if (!last) { <span class="separator"> </span> }
+                            }
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        @if (object.hasMetadata(['person.subjectInterest'])) {
+        <div class="simple-view-element mb-3 p-3">
+            <h4 class="simple-view-element-header">{{ 'item.page.person.subjectInterest' | translate }}</h4>
+            @for (mdValue of object.allMetadataValues(['person.subjectInterest']); track $index; let last = $last) {
+            <span class="badge badge-pill bg-karu-orange mx-1">{{ mdValue }}</span>
+            @if (!last) {
+            <span class="separator"> </span>
+            }
+            }
+        </div>
+        }
+    </div>
+
+    <div class="col-12 col-md-7">
+        <ds-related-items [parentItem]="object" [relationType]="'isProjectOfPerson'"
+            [label]="'item.page.projects' | translate">
+        </ds-related-items>
+    </div>
+    <div class="mt-5 w-100 px-0">
+        <ds-tabbed-related-entities-search [item]="object" [relationTypes]="[{
+                                          label: 'isAuthorOfPublication',
+                                          filter: 'isAuthorOfPublication',
+                                          configuration: 'default-relationships'
+                                        }]">
+        </ds-tabbed-related-entities-search>
+    </div>
+</div>

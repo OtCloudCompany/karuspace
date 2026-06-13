@@ -1,0 +1,45 @@
+<ng-container *ngVar="(communitiesRD$ | async) as communitiesRD">
+  @if (communitiesRD?.hasSucceeded ) {
+    <div>
+      <h4>{{'home.top-level-communities.head' | translate}}</h4>
+      <p class="lead">{{'home.top-level-communities.help' | translate}}</p>
+      <ngb-carousel #carousel="ngbCarousel" [showNavigationArrows]="false" [animation]="true" [interval]="5000"
+            [showNavigationIndicators]="true">
+            <ng-template ngbSlide *ngFor="let group of groupedSlides">
+                <div class="row justify-content-between">
+                    <div class="col-md-3 col-sm-6 mb-4 px-sm-4 d-flex" *ngFor="let slide of group">
+                        <div class="card bg-light h-100 d-flex flex-column w-100">
+                            <a href="/communities/{{ slide.collectionUrl }}">
+                                <img src="/assets/kubuni/images/community-slides/{{ slide.icon }}.webp" 
+                                class="card-img-top" alt="{{ slide.name }}">
+                            </a>
+                            
+                            <div class="card-body text-center custom-border">
+                                <h5 class="card-title bg-karu-green text-white font-weight-bold mt-4">
+                                    {{ slide.itemsNumber }} Items
+                                </h5>
+                                <a href="/communities/{{ slide.collectionUrl }}">
+                                    <p class="card-text font-weight-bold">{{ slide.name }}</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            <div class="justify-content-center mt-4 bg-sagrado-red">
+                <ol class="carousel-indicators">
+                    <li *ngFor="let group of groupedSlides; let i = index"
+                        [class.active]="carousel.activeId === 'ngb-slide-' + i"
+                        (click)="carousel.select('ngb-slide-' + i)">
+                    </li>
+                </ol>
+            </div>
+        </ngb-carousel>
+    </div>
+  }
+  @if (communitiesRD?.hasFailed ) {
+    <ds-error message="{{'error.top-level-communities' | translate}}"></ds-error>
+  }
+  @if (communitiesRD?.isLoading ) {
+    <ds-loading message="{{'loading.top-level-communities' | translate}}"></ds-loading>
+  }</ng-container>

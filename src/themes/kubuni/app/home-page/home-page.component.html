@@ -1,0 +1,29 @@
+<ds-home-news></ds-home-news>
+<div class="container-fluid bg-light mt-0 py-2 text-white">
+  <div class="container">
+    <ds-repository-summaries></ds-repository-summaries>
+  </div>
+</div>
+
+@if (showDiscoverFilters) {
+  <ds-configuration-search-page
+    [sideBarWidth]="3"
+    [showViewModes]="false"
+    [searchEnabled]="false"
+    [inPlaceSearch]="false"
+    [showScopeSelector]="false">
+    <ng-container searchContentTop *ngTemplateOutlet="homeContent"></ng-container>
+  </ds-configuration-search-page>
+}
+@if (!showDiscoverFilters) {
+  <div class="container" id="homepage-content">
+    <ng-container *ngTemplateOutlet="homeContent"></ng-container>
+  </div>
+}
+<ds-suggestions-popup></ds-suggestions-popup>
+
+<ng-template #homeContent>
+  @if (recentSubmissionspageSize>0) {
+    <ds-recent-item-list></ds-recent-item-list>
+  }
+</ng-template>

@@ -1,0 +1,106 @@
+<footer class="text-white">
+  <div class="top-footer bg-karu-green">
+    <!-- Grid container -->
+    <div class="container p-4">
+      <!--Grid row-->
+      <div class="row">
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-4 mb-4 mb-lg-0">
+          <h4 class="footer-title">Library Resources</h4>
+          <ul  class="list-unstyled mb-0">
+            <li ><a href="https://library.karu.ac.ke" target="_blank">Library Website</a></li>
+            <li ><a href="https://past-exams.karu.ac.ke" target="_blank">Past Exam Papers</a></li>
+            <li ><a href="https://opac.karu.ac.ke" target="_blank">Print Books Catalogue</a></li>
+            <li ><a href="https://app.myloft.xyz/user/login?institute=clmssdbzl0iyaz401xx9fh8ug" target="_blank">E-Resources</a></li>
+            <li ><a href="https://turnitin.com" target="_blank">Turnitin</a></li>
+          </ul>
+        </div>
+        <!--Grid column-->
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-4 mb-4 mb-lg-0">
+          <h4 class="footer-title">Student Resources</h4>
+          <ul  class="list-unstyled mb-0">
+            <li ><a href="https://students.karu.ac.ke/" target="_blank">Students' Portal</a></li>
+            <li ><a href="https://e-learning.karu.ac.ke/" target="_blank">E-Learning Portal</a></li>
+            <li ><a href="https://karu.ac.ke/odel-guide" target="_blank">E-Learning Guidelines</a></li>
+            <li ><a href="http://email.karu.ac.ke/" target="_blank">Email Retrieval</a></li>
+            <li ><a href="http://karu.ac.ke/payments/" target="_blank">Fee Payment Guidelines</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-4 mb-4 mb-lg-0">
+          <h4 class="footer-title">Staff Resources</h4>
+          <ul  class="list-unstyled mb-0">
+            <li ><a href="https://staff.karu.ac.ke/" target="_blank">Staff Portal</a></li>
+            <li ><a href="https://accounts.google.com/signin/v2/identifier?continue=https%3A%2F%2Fsites.google.com%2Fa%2Fkaru.ac.ke%2Fstudents%2F%3Fpli%3D1&followup=https%3A%2F%2Fsites.google.com%2Fa%2Fkaru.ac.ke%2Fstudents%2F%3Fpli%3D1&hd=karu.ac.ke&service=jotspot&sacu=1&rip=1&flowName=GlifWebSignIn&flowEntry=ServiceLogin" target="_blank">Staff Email</a></li>
+            <li ><a [routerLink]="'/search?f.entityType=Person,equals&spc.page=1'">Scholar Profiles</a></li>
+            <li ><a href="https://app.myloft.xyz/user/login?institute=clmssdbzl0iyaz401xx9fh8ug" target="_blank">E-Resources</a></li>
+            <li ><a href="https://karu.ac.ke/staff-forms/" target="_blank">Staff Forms</a></li>
+          </ul>
+        </div>
+        <!--Grid column-->
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-4 mb-4 mb-md-0 text-center">
+          <div>
+            <img src="/assets/kubuni/images/karu-sun.png" alt="Karatina University" class="img-fluid">
+          </div>
+          <p>
+            Karatina University Library<br>
+            P.O. BOX 1957—10101, Karatina, Kenya. <br>
+
+            Tel: (+254) 20 2176 713 <br>
+
+            Mob: (+254)729 721 200 <br>
+            library&#64;karu.ac.ke
+          </p>
+        </div>
+        <!--Grid column-->
+      </div>
+      <!--Grid row-->
+    </div>
+  </div>
+
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div
+    class="bottom-footer p-1 d-flex flex-column flex-md-row justify-content-center align-items-center bg-karu-orange">
+    <div class="content-container align-self-center">
+      <p class="text-center mb-0">
+        {{ 'footer.copyright' | translate:{year: dateObj | date:'y'} }} Karatina University Library 
+      </p>
+      <ul class="footer-info list-unstyled d-flex justify-content-center mb-0">
+        @if (showCookieSettings) {
+        <li>
+          <button class="btn btn-link text-white" type="button" (click)="openCookieSettings()" role="button"
+            tabindex="0">
+            {{ 'footer.link.cookies' | translate}}
+          </button>
+        </li>
+        }
+        <li>
+          <a class="btn text-white" routerLink="info/accessibility" role="link" tabindex="0">{{
+            'footer.link.accessibility' | translate }}</a>
+        </li>
+        @if (showPrivacyPolicy) {
+        <li>
+          <a class="btn text-white" routerLink="info/privacy" role="link" tabindex="0">{{ 'footer.link.privacy-policy' |
+            translate}}</a>
+        </li>
+        }
+        @if (showEndUserAgreement) {
+        <li>
+          <a class="btn text-white" routerLink="info/end-user-agreement" role="link" tabindex="0">{{
+            'footer.link.end-user-agreement' | translate}}</a>
+        </li>
+        }
+        @if (showSendFeedback$ | async) {
+        <li>
+          <a class="btn text-white" routerLink="info/feedback" role="link" tabindex="0">{{ 'footer.link.feedback' |
+            translate}}</a>
+        </li>
+        }
+      </ul>
+    </div>
+  </div>
+  <!-- Copyright -->
+</footer>

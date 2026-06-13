@@ -1,0 +1,30 @@
+<div class="d-flex text-center py-3" *ngIf="isLoading">
+    <ds-loading message="Loading entities"></ds-loading>
+</div>
+<div class="d-flex text-center py-3" *ngIf="!isLoading">
+    <div *ngIf="facetValues.length > 0" class="d-flex">
+        <div class="d-inline mx-2" *ngFor="let facetVal of facetValues; index as i; track by i">
+            <a class="text-white" [href]="'/search?f.entityType='+facetVal.label+',equals&amp;spc.page=1'">
+                <i class="fa-file-text fa-xl fas text-karu-green" *ngIf="facetVal.label === 'Publication'"></i>
+                <i class="fa-book fa-xl fas text-karu-green" *ngIf="facetVal.label === 'Thesis'"></i>
+                <i class="fa-users fa-xl fas text-karu-green" *ngIf="facetVal.label === 'Person'"></i>
+                <span class="text-dark"> {{ facetVal.count }} </span>
+                <div class="">
+                    <small class="text-dark" *ngIf="facetVal.label === 'Publication'">Research Publications </small>
+                    <small class="text-dark" *ngIf="facetVal.label === 'Thesis'">Postgraduate Theses </small>
+                    <small class="text-dark" *ngIf="facetVal.label === 'Person'">Scholar Profiles </small>
+                </div>
+            </a>
+        </div>
+    </div>
+    
+    <div class="mx-2 ms-auto">
+        <a routerlink="/self-archive" class="text-white" href="/self-archive"
+            title="Self archiving allows you to upload your own research outputs to the repository.">
+            <i class="fas fa-download fa-xl text-karu-green"></i>
+            <div class="d-inline text-dark">
+                <h4>Self Archive</h4>
+            </div>
+        </a>
+    </div>
+</div>

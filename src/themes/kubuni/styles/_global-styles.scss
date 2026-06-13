@@ -1,0 +1,247 @@
+// Add any global css for the theme here
+
+// imports the base global style
+@import '../../../styles/_global-styles.scss';
+
+:root {
+  --karu-green: #02773b;
+  --karu-orange: #bb9257;
+  --karu-red: #e63535;
+  --bs-navbar-brand-font-size: 1rem !important;
+  --ds-header-icon-color: #fff !important;
+  --ds-navbar-link-color: #000 !important;
+  --bs-btn-color: #fff !important;
+  --bs-btn-bg: #bb9257 !important;
+  --bs-btn-border-color: #bb9257 !important;
+  --bs-btn-hover-color: #fff !important;
+}
+
+.btn-primary {
+  background-color: var(--karu-orange) !important;
+  color: #fff !important;
+  border-color: var(--karu-orange) !important;
+}
+
+.navbar-link a {
+  color: var(--ds-navbar-link-color) !important;
+}
+
+.bg-karu-green {
+  background-color: var(--karu-green) !important;
+}
+
+.bg-karu-orange {
+  background-color: var(--karu-orange) !important;
+}
+.bg-karu-red {
+  background-color: var(--karu-red) !important;
+}
+
+.text-karu-green {
+  color: var(--karu-green) !important;
+}
+
+.text-karu-orange {
+  color: var(--karu-orange) !important;
+}
+
+.outer-wrapper {
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.19),
+    -2px 2px 5px rgba(0, 0, 0, 0.19);
+}
+
+// .outer-wrapper.container{
+//   padding-right: 0px !important;
+// }
+.navbar-brand {
+  font-size: 1rem !important;
+  font-weight: 400 !important;
+  line-height: 1.5 !important;
+}
+
+.dropdownLogin {
+  color: #000 !important;
+}
+
+.jumbotron form {
+  background-color: transparent !important;
+  padding: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.home-news-content {
+  background-image: url('/assets/kubuni/images/karatina-university-library-entrance.webp') !important;
+  background-size: cover !important;
+  min-height: 350px !important;
+  position: relative;
+}
+
+div.home-news-content .overlay {
+  background: #000;
+  background: -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(50%, transparent), color-stop(70%, rgba(0, 0, 0, .6110819328)), to(rgba(0, 0, 0, .75)));
+  background: linear-gradient(180deg, transparent, transparent 10%, rgba(0, 0, 0, .6110819328) 70%, rgba(0, 0, 0, .75));
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding-top: 70px;
+}
+
+div.home-news-content .container {
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, .6);
+}
+
+.home-news-content form {
+  max-width: 700px !important;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center !important;
+}
+
+.home-news-content form>div>div {
+  padding: 4px !important;
+  background-color: #fff !important;
+  border-radius: 3px !important;
+
+  input {
+    border: none !important;
+    box-shadow: none !important;
+  }
+}
+
+.jumbotron form .btn-primary {
+  background-color: #fff !important;
+  color: #fff !important;
+  // border-color: var(--karu-orange) !important;
+}
+
+.subject-tag .tag-input {
+  border: 1px solid #ccc !important;
+  box-shadow: none !important;
+  color: #000 !important;
+}
+
+.dropdownLogin:active {
+  border: none !important;
+}
+
+input:focus,
+textarea:focus,
+btn:focus,
+btn:active button:focus,
+.dropdownLogin:focus,
+.dropdownLogin:active a:focus,
+select:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.dropdownLogin:focus,
+.dropdownLogin:active {
+  border: none !important;
+}
+
+.item-page-title-field {
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+}
+
+header .fa-caret-down,
+header .fa-user-circle,
+header .dropdownLogout {
+  color: #000 !important;
+}
+
+.bg-info {
+  background-color: var(--karu-orange) !important;
+}
+
+#search-content ul li a {
+  color: #000 !important;
+  font-weight: 500 !important;
+}
+
+#search-content .thumbnail {
+  background-color: #eee !important;
+  padding: 2px !important;
+  border-radius: 3px !important;
+}
+
+.top-level-communities {
+  .card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-body {
+    flex: 1 1 auto;
+    /* makes body stretch evenly */
+  }
+}
+
+.row-with-sidebar .sidebar-content #homepage-content {
+  background-color: #ccc;
+}
+
+ds-recent-item-list .thumbnail img {
+  // border: solid #eee 1px;
+  border-radius: 5px;
+  padding: 2px;
+}
+
+.page-link.active,
+.active>.page-link {
+  color: #fff;
+  background-color: var(--karu-orange) !important;
+  border-color: var(--karu-orange) !important;
+}
+
+.facet-filter {
+  border: 1px solid var(--karu-orange) !important;
+
+  i {
+    color: var(--karu-orange) !important;
+  }
+}
+
+.facet-filter .bg-secondary {
+  background-color: var(--karu-orange) !important;
+}
+
+footer {
+  text-align: left !important;
+
+  img {
+    min-width: 100px;
+    min-height: 100px;
+  }
+
+  .aligncenter,
+  div.aligncenter {
+    display: block;
+    margin: 5px auto 5px auto;
+    clear: both;
+  }
+}
+
+footer a {
+  color: #fff !important;
+}
+
+footer .footer-title {
+  border-bottom: solid #fff 1px;
+  padding-bottom: 15px;
+}
+
+footer ul li {
+  margin-bottom: 8px
+}
+
+.profile-image .simple-view-element {
+  margin-bottom: 0px !important;
+}
+
+@media (min-width: 1200px) {
+  h2 .simple-view-element-header {
+    font-size: 1.25rem !important;
+  }
+}

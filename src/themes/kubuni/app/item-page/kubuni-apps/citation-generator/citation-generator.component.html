@@ -1,0 +1,28 @@
+<h5 class="simple-view-element-header">{{ "item.page.citeThisItem" | translate}}</h5>
+<ul ngbNav #nav="ngbNav" class="nav-tabs border-light bg-light pt-2 px-2">
+    <li [ngbNavItem]="1">
+        <a ngbNavLink>APA</a>
+        <ng-template ngbNavContent>
+            <div [innerHTML]="apaCitation" class="bg-white pb-2 px-2 pt-0"></div>
+        </ng-template>
+    </li>
+    <li [ngbNavItem]="2">
+        <a ngbNavLink>MLA</a>
+        <ng-template ngbNavContent>
+            <div [innerHTML]="mlaCitation" class="bg-white pb-2 px-2 pt-0"></div>
+        </ng-template>
+    </li>
+    <li [ngbNavItem]="3">
+        <a ngbNavLink>Harvard</a>
+        <ng-template ngbNavContent>
+            <div [innerHTML]="harvardCitation" class="bg-white pb-2 px-2 pt-0"></div>
+        </ng-template>
+    </li>
+    <li [ngbNavItem]="4">
+        <a ngbNavLink>Vancouver</a>
+        <ng-template ngbNavContent>
+            <div [innerHTML]="vancouverCitation" class="bg-white pb-2 px-2 pt-0"></div>
+        </ng-template>
+    </li>
+</ul>
+<div [ngbNavOutlet]="nav" class="mb-2 mt-0 px-2 pb-2 pt-0 bg-light"></div>
