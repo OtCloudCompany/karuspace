@@ -4,31 +4,49 @@ import {
     Injectable,
     PLATFORM_ID,
 } from '@angular/core';
-// Import world map data
-import worldMap from '@highcharts/map-collection/custom/world.geo.json';
-import * as Highcharts from 'highcharts';
-import ExportingModule from 'highcharts/modules/exporting';
-import MapModule from 'highcharts/modules/map';
 
 @Injectable({
     providedIn: 'root',
 })
 export class HighchartsService {
-    Highcharts: any = Highcharts;
+    private _highcharts: any = null;
 
     constructor(@Inject(PLATFORM_ID) private platformId: Object) {
         if (isPlatformBrowser(this.platformId)) {
-            // Initialize the modules
-            (MapModule as any)(Highcharts);
-            (ExportingModule as any)(Highcharts);
-
-            // Add map data to Highcharts
-            Highcharts.maps['custom/world'] = worldMap;
+            this.initHighcharts();
         }
     }
 
-    getHighcharts(): any {
-        return this.Highcharts;
+    private async initHighcharts(): Promise<void> {
+        const [
+            Highcharts,
+            MapModule,
+            ExportingModule,
+            worldMap,
+        ] = await Promise.all([
+            import('highcharts'),
+            import('highcharts/modules/map'),
+            import('highcharts/modules/exporting'),
+            import('@highcharts/map-collection/custom/world.geo.json'),
+        ]);
+
+        (MapModule as any).default(Highcharts.default);
+        (ExportingModule as any).default(Highcharts.default);
+        (Highcharts.default as any).maps['custom/world'] = worldMap.default;
+
+        this._highcharts = Highcharts.default;
     }
 
+    async getHighcharts(): Promise<any> {
+        if (!isPlatformBrowser(this.platformId)) {
+            return null;
+        }
+
+        // Wait for initialization if still loading
+        if (!this._highcharts) {
+            await this.initHighcharts();
+        }
+
+        return this._highcharts;
+    }
 }

@@ -57,8 +57,8 @@ export class UsageStatisticsComponent implements OnInit {
     @Inject(APP_CONFIG) protected appConfig: AppConfig) {
   }
 
-  ngOnInit() {
-    this.Highcharts = this.highchartsService.getHighcharts();
+  async ngOnInit() {
+    this.Highcharts = await this.highchartsService.getHighcharts();
 
     const report = this.usageReportDataService
       .searchStatistics(this.object._links.self.href, 0, 10);
