@@ -1,0 +1,104 @@
+<div class="container px-0 staff-activity">
+  <h2>{{ 'otcloud.staff-activity.title' | translate }}</h2>
+  <p class="text-muted">{{ 'otcloud.staff-activity.description' | translate }}</p>
+
+  <form [formGroup]="filterForm" (ngSubmit)="onSubmit()" class="row g-2 align-items-end mb-3">
+    <div class="col-auto">
+      <label class="form-label" for="staff-activity-start">{{ 'otcloud.staff-activity.start-date' | translate }}</label>
+      <input id="staff-activity-start" class="form-control" placeholder="yyyy-mm-dd" formControlName="startDate"
+        ngbDatepicker #staffActivityDStart="ngbDatepicker" (click)="staffActivityDStart.toggle()">
+    </div>
+    <div class="col-auto">
+      <label class="form-label" for="staff-activity-end">{{ 'otcloud.staff-activity.end-date' | translate }}</label>
+      <input id="staff-activity-end" class="form-control" placeholder="yyyy-mm-dd" formControlName="endDate"
+        ngbDatepicker #staffActivityDEnd="ngbDatepicker" (click)="staffActivityDEnd.toggle()">
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-primary" type="submit" [disabled]="isLoading">
+        {{ 'otcloud.staff-activity.apply' | translate }}
+      </button>
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-outline-secondary" type="button" (click)="onReset()" [disabled]="isLoading">
+        {{ 'otcloud.staff-activity.reset' | translate }}
+      </button>
+    </div>
+    <div class="col-auto ms-auto">
+      <button class="btn btn-outline-primary" type="button" (click)="downloadCSV()"
+        [disabled]="isLoading || totalElements === 0">
+        {{ 'otcloud.staff-activity.export-csv' | translate }}
+      </button>
+    </div>
+  </form>
+
+  @if (totalElements > 0) {
+  <div class="alert alert-primary d-inline-flex align-items-center gap-2 mb-3">
+    <i class="fas fa-file-circle-plus" aria-hidden="true"></i>
+    <span>{{ 'otcloud.staff-activity.total-items-created' | translate: { count: totalItemsCreated } }}</span>
+  </div>
+  }
+
+  @if (validationError) {
+  <div class="alert alert-warning">{{ validationError }}</div>
+  }
+  @if (errorMessage) {
+  <div class="alert alert-danger">{{ errorMessage }}</div>
+  }
+  @if (truncated) {
+  <div class="alert alert-warning">
+    {{ 'otcloud.staff-activity.truncated' | translate: { scanned: recordsScanned } }}
+  </div>
+  }
+
+  @if (isLoading) {
+  <div class="d-flex align-items-center gap-2 my-3">
+    <div class="spinner-border spinner-border-sm" role="status"></div>
+    <span>{{ 'otcloud.staff-activity.loading' | translate }}</span>
+  </div>
+  } @else if (noData) {
+  <div class="alert alert-info">{{ 'otcloud.staff-activity.no-data' | translate }}</div>
+  } @else {
+  <div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+      <thead>
+        <tr>
+          <th scope="col">{{ 'otcloud.staff-activity.table.staff' | translate }}</th>
+          <th scope="col" class="text-end">{{ 'otcloud.staff-activity.table.created' | translate }}</th>
+          <th scope="col" class="text-end">{{ 'otcloud.staff-activity.table.edited' | translate }}</th>
+          <th scope="col" class="text-end">{{ 'otcloud.staff-activity.table.deleted' | translate }}</th>
+          <th scope="col" class="text-end">{{ 'otcloud.staff-activity.table.files' | translate }}</th>
+          <th scope="col" class="text-end">{{ 'otcloud.staff-activity.table.records' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of rows; track row.id) {
+        <tr>
+          <td>
+            @if (row.unattributed) {
+            <div>{{ 'otcloud.staff-activity.unattributed' | translate }}</div>
+            <small class="text-muted">{{ 'otcloud.staff-activity.unattributed-hint' | translate }}</small>
+            } @else {
+            <div>{{ row.name || row.id }}</div>
+            @if (row.email) {
+            <small class="text-muted">{{ row.email }}</small>
+            }
+            }
+          </td>
+          <td class="text-end">{{ row.itemsCreated }}</td>
+          <td class="text-end">{{ row.itemsEdited }}</td>
+          <td class="text-end">{{ row.itemsDeleted }}</td>
+          <td class="text-end">{{ row.bitstreamsAdded }}</td>
+          <td class="text-end text-muted">{{ row.totalEvents }}</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <div class="text-muted">
+    {{ 'otcloud.staff-activity.total' | translate: { count: totalElements } }}
+    &middot;
+    {{ 'otcloud.staff-activity.records-scanned' | translate: { count: recordsInPeriod } }}
+  </div>
+  }
+</div>

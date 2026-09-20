@@ -27,8 +27,8 @@ import { listableObjectComponent } from '../../../../../../../app/shared/object-
 import { ThemedResultsBackButtonComponent } from '../../../../../../../app/shared/results-back-button/themed-results-back-button.component';
 import { ThemedThumbnailComponent } from '../../../../../../../app/thumbnail/themed-thumbnail.component';
 import { CitationGeneratorComponent } from '../../../kubuni-apps/citation-generator/citation-generator.component';
-import { UsageMetricsComponent } from    'src/themes/kubuni/app/otcloud-apps/usage-metrics/usage-metrics.component';
-// import { UsageStatisticsComponent } from 'src/themes/kubuni/app/otcloud-apps/usage-statistics/usage-statistics.component'; 
+import { UsageMetricsComponent } from 'src/themes/kubuni/app/otcloud-apps/usage-metrics/usage-metrics.component';
+import { UsageStatisticsComponent } from 'src/themes/kubuni/app/otcloud-apps/usage-statistics/usage-statistics.component';
 import { StripLineBreaksPipe } from '../../../strip-line-breaks.pipe';
 
 @listableObjectComponent('Publication', ViewMode.StandalonePage, Context.Any, 'kubuni')
@@ -60,6 +60,7 @@ import { StripLineBreaksPipe } from '../../../strip-line-breaks.pipe';
     TruncatableComponent,
     TruncatablePartComponent,
     UsageMetricsComponent,
+    UsageStatisticsComponent,
   ],
 })
 export class PublicationComponent extends BaseComponent {

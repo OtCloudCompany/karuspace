@@ -1,5 +1,7 @@
 {
 
+  // npm run merge-i18n -- -s src/themes/kubuni/assets/i18n
+
   "thesis.page.titleprefix": "Thesis",
   "item.page.nonentityprefix": "Publication",
   "thesis.page.edit": "Edit this Thesis",
@@ -40,6 +42,9 @@
   "item.page.person.specialty": "Specialty",
   "item.page.person.subjectInterest": "Areas of Interest",
   "item.page.person.shareProfile": "Share this Profile",
+  "item.page.stats.country": "Top 10 Countries",
+  "item.page.stats.city": "Top 10 Cities",
+  "item.page.views": "Views",
 
   "item.page.usageStatistics": "Usage Statistics",
   "item.page.usageMetrics": "Usage Metrics",
@@ -49,6 +54,7 @@
   "item.page.topCities": "Top 10 Cities",
   "item.page.citeThisItem": "Cite this Item",
   "item.page.usageMetrics": "Usage Metrics",
+  "graduationbooklet.page.titleprefix": "Graduation Booklet",
 
   "search.filters.applied.f.isAuthorOfPublication": "Author ID: ",
   "item.page.link.full": "All Metadata",

@@ -1,0 +1,71 @@
+<div class="row g-3 repository-summary">
+  <div class="col-6 col-md-4 col-xl-2">
+    <div class="card h-100 summary-card">
+      <div class="card-body">
+        <i class="fas fa-eye text-primary mb-2" aria-hidden="true"></i>
+        <div class="summary-value">{{ totalViews === null ? '–' : (totalViews | number) }}</div>
+        <div class="summary-label">{{ 'otcloud.repository-summary.views' | translate }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6 col-md-4 col-xl-2">
+    <div class="card h-100 summary-card">
+      <div class="card-body">
+        <i class="fas fa-earth-africa text-primary mb-2" aria-hidden="true"></i>
+        <div class="summary-value">{{ countriesReached === null ? '–' : (countriesReached | number) }}</div>
+        <div class="summary-label">{{ 'otcloud.repository-summary.countries' | translate }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6 col-md-4 col-xl-2">
+    <div class="card h-100 summary-card">
+      <div class="card-body">
+        <i class="fas fa-file-lines text-primary mb-2" aria-hidden="true"></i>
+        <div class="summary-value">{{ totalItems === null ? '–' : (totalItems | number) }}</div>
+        <div class="summary-label">{{ 'otcloud.repository-summary.items' | translate }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6 col-md-4 col-xl-2">
+    <div class="card h-100 summary-card">
+      <div class="card-body">
+        <i class="fas fa-file-circle-plus text-primary mb-2" aria-hidden="true"></i>
+        <div class="summary-value">{{ itemsInPeriod === null ? '–' : (itemsInPeriod | number) }}</div>
+        <div class="summary-label">{{ 'otcloud.repository-summary.items-in-period' | translate }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6 col-md-4 col-xl-2">
+    <div class="card h-100 summary-card">
+      <div class="card-body">
+        <i class="fas fa-lock-open text-primary mb-2" aria-hidden="true"></i>
+        <div class="summary-value">{{ openAccessItems === null ? '–' : (openAccessItems | number) }}</div>
+        <div class="summary-label">{{ 'otcloud.repository-summary.open-access' | translate }}</div>
+        @if (percentOfItems(openAccessItems) !== null) {
+          <div class="summary-sub">
+            {{ 'otcloud.repository-summary.percent-of-items' | translate: { percent: percentOfItems(openAccessItems) } }}
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="col-6 col-md-4 col-xl-2">
+    <div class="card h-100 summary-card">
+      <div class="card-body">
+        <i class="fas fa-file-arrow-down text-primary mb-2" aria-hidden="true"></i>
+        <div class="summary-value">{{ fullTextItems === null ? '–' : (fullTextItems | number) }}</div>
+        <div class="summary-label">{{ 'otcloud.repository-summary.full-text' | translate }}</div>
+        @if (percentOfItems(fullTextItems) !== null) {
+          <div class="summary-sub">
+            {{ 'otcloud.repository-summary.percent-of-items' | translate: { percent: percentOfItems(fullTextItems) } }}
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

@@ -5,6 +5,7 @@ import { listableObjectComponent } from 'src/app/shared/object-collection/shared
 
 import { UsageMetricsComponent } from '../../../kubuni-apps/usage-metrics/usage-metrics.component';
 import { UsageStatisticsComponent } from 'src/themes/kubuni/app/otcloud-apps/usage-statistics/usage-statistics.component'; 
+import { CitationGeneratorComponent } from '../../../kubuni-apps/citation-generator/citation-generator.component';
 import { StripLineBreaksPipe } from '../../../strip-line-breaks.pipe';
 import { PublicationComponent as BaseComponent } from 'src/app/item-page/simple/item-types/publication/publication.component';
 import { UsageReport } from 'src/app/core/statistics/models/usage-report.model';
@@ -28,7 +29,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'ds-newsletter',
   standalone: true,
-  imports: [AsyncPipe, RouterLink, UsageMetricsComponent, TranslateModule, UsageStatisticsComponent, StripLineBreaksPipe, ThemedResultsBackButtonComponent, MiradorViewerComponent, ThemedItemPageTitleFieldComponent, TruncatableComponent, TruncatablePartComponent, GenericItemPageFieldComponent, CollectionsComponent, ItemPageUriFieldComponent, ThemedMetadataRepresentationListComponent, ThemedFileSectionComponent, ItemPageDateFieldComponent],
+  imports: [CitationGeneratorComponent, AsyncPipe, RouterLink, UsageMetricsComponent, TranslateModule, UsageStatisticsComponent, StripLineBreaksPipe, ThemedResultsBackButtonComponent, MiradorViewerComponent, ThemedItemPageTitleFieldComponent, TruncatableComponent, TruncatablePartComponent, GenericItemPageFieldComponent, CollectionsComponent, ItemPageUriFieldComponent, ThemedMetadataRepresentationListComponent, ThemedFileSectionComponent, ItemPageDateFieldComponent],
   templateUrl: './newsletter.component.html',
   styleUrl: './newsletter.component.scss'
 })

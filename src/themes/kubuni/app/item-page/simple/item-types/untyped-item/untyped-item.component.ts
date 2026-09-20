@@ -5,6 +5,8 @@ import {
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { UsageReport } from 'src/app/core/statistics/models/usage-report.model';
+import { UsageStatisticsComponent } from 'src/themes/kubuni/app/otcloud-apps/usage-statistics/usage-statistics.component';
 
 import { Context } from '../../../../../../../app/core/shared/context.model';
 import { Item } from '../../../../../../../app/core/shared/item.model';
@@ -27,6 +29,8 @@ import { MetadataFieldWrapperComponent } from '../../../../../../../app/shared/m
 import { listableObjectComponent } from '../../../../../../../app/shared/object-collection/shared/listable-object/listable-object.decorator';
 import { ThemedResultsBackButtonComponent } from '../../../../../../../app/shared/results-back-button/themed-results-back-button.component';
 import { ThemedThumbnailComponent } from '../../../../../../../app/thumbnail/themed-thumbnail.component';
+import { CitationGeneratorComponent } from '../../../kubuni-apps/citation-generator/citation-generator.component';
+import { UsageMetricsComponent } from '../../../kubuni-apps/usage-metrics/usage-metrics.component';
 
 @listableObjectComponent(Item, ViewMode.StandalonePage, Context.Any, 'kubuni')
 @Component({
@@ -39,6 +43,7 @@ import { ThemedThumbnailComponent } from '../../../../../../../app/thumbnail/the
   standalone: true,
   imports: [
     AsyncPipe,
+    CitationGeneratorComponent,
     CollectionsComponent,
     DsoEditMenuComponent,
     GenericItemPageFieldComponent,
@@ -57,7 +62,16 @@ import { ThemedThumbnailComponent } from '../../../../../../../app/thumbnail/the
     ThemedResultsBackButtonComponent,
     ThemedThumbnailComponent,
     TranslateModule,
+    UsageMetricsComponent,
+    UsageStatisticsComponent,
   ],
 })
 export class UntypedItemComponent extends BaseComponent {
+  usageReport: UsageReport[] | null;
+  reportsLoaded = false;
+
+  onReportLoaded(reportData: UsageReport[]) {
+    this.usageReport = reportData;
+    this.reportsLoaded = true;
+  }
 }

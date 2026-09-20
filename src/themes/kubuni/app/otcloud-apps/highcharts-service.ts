@@ -10,31 +10,14 @@ import {
 })
 export class HighchartsService {
     private _highcharts: any = null;
+    private _loading: Promise<any> | null = null;
 
     constructor(@Inject(PLATFORM_ID) private platformId: Object) {
         if (isPlatformBrowser(this.platformId)) {
-            this.initHighcharts();
+            // Kick off loading early, but ignore failures here: getHighcharts() is
+            // where callers observe the result.
+            this.load().catch(() => undefined);
         }
-    }
-
-    private async initHighcharts(): Promise<void> {
-        const [
-            Highcharts,
-            MapModule,
-            ExportingModule,
-            worldMap,
-        ] = await Promise.all([
-            import('highcharts'),
-            import('highcharts/modules/map'),
-            import('highcharts/modules/exporting'),
-            import('@highcharts/map-collection/custom/world.geo.json'),
-        ]);
-
-        (MapModule as any).default(Highcharts.default);
-        (ExportingModule as any).default(Highcharts.default);
-        (Highcharts.default as any).maps['custom/world'] = worldMap.default;
-
-        this._highcharts = Highcharts.default;
     }
 
     async getHighcharts(): Promise<any> {
@@ -42,11 +25,41 @@ export class HighchartsService {
             return null;
         }
 
-        // Wait for initialization if still loading
-        if (!this._highcharts) {
-            await this.initHighcharts();
-        }
+        return this.load();
+    }
 
-        return this._highcharts;
+    /**
+     * Loads Highcharts and its modules once, reusing the in-flight promise for
+     * concurrent callers.
+     */
+    private load(): Promise<any> {
+        if (this._highcharts) {
+            return Promise.resolve(this._highcharts);
+        }
+        if (!this._loading) {
+            this._loading = this.initHighcharts();
+        }
+        return this._loading;
+    }
+
+    private async initHighcharts(): Promise<any> {
+        // Import the ESM builds, not the default UMD ones: the UMD module bundles
+        // (highcharts/modules/*) read Highcharts off `window._Highcharts`, which a
+        // bundler never sets, so they throw while initialising. The ESM builds
+        // under highcharts/esm import the Highcharts instance themselves and
+        // register against it on load, so they must not be applied as functions.
+        const [Highcharts, worldMap] = await Promise.all([
+            import('highcharts/esm/highcharts'),
+            import('@highcharts/map-collection/custom/world.geo.json'),
+            import('highcharts/esm/modules/map'),
+            import('highcharts/esm/modules/exporting'),
+        ]);
+
+        const highcharts = (Highcharts as any).default;
+        // `maps` is added by the map module, so this has to come after it loads.
+        highcharts.maps['custom/world'] = (worldMap as any).default ?? worldMap;
+
+        this._highcharts = highcharts;
+        return highcharts;
     }
 }

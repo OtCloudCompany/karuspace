@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ItemPageNavbarComponent } from 'src/themes/kubuni/app/otcloud-apps/item-page-navbar/item-page-navbar.component';
 import { UsageStatisticsComponent } from 'src/themes/kubuni/app/otcloud-apps/usage-statistics/usage-statistics.component'; 
+import { CitationGeneratorComponent } from '../../../kubuni-apps/citation-generator/citation-generator.component';
 import { UntypedItemComponent as BaseComponent } from 'src/app/item-page/simple/item-types/untyped-item/untyped-item.component';
 import { listableObjectComponent } from 'src/app/shared/object-collection/shared/listable-object/listable-object.decorator';
 import { Item } from '@dspace/core/shared/item.model';
@@ -31,7 +32,7 @@ import { UsageReport } from '@dspace/core/statistics/models/usage-report.model';
 @Component({
   selector: 'ds-newspaper-article',
   standalone: true,
-  imports: [UsageMetricsComponent, UsageStatisticsComponent,
+  imports: [CitationGeneratorComponent, UsageMetricsComponent, UsageStatisticsComponent,
     ItemPageNavbarComponent, StripLineBreaksPipe,
     GenericItemPageFieldComponent, MetadataRepresentationListComponent,
     ItemPageUriFieldComponent,

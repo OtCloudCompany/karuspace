@@ -1,0 +1,111 @@
+<div class="container px-0 metadata-usage">
+  <h2>{{ headingKey | translate }}</h2>
+  @if (resolvedObjectName) {
+  <p class="text-muted">{{ resolvedObjectName }}</p>
+  }
+
+  <form [formGroup]="filterForm" (ngSubmit)="onSubmit()" class="row g-2 align-items-end mb-3">
+    @if (!lockField && fieldOptions.length > 1) {
+    <div class="col-auto">
+      <label class="form-label" for="metadata-usage-field">{{ 'otcloud.metadata-usage.field' | translate }}</label>
+      <select id="metadata-usage-field" class="form-select" formControlName="field">
+        @for (option of fieldOptions; track option.value) {
+        <option [value]="option.value">{{ option.labelKey | translate }}</option>
+        }
+      </select>
+    </div>
+    }
+    @if (!externalDateRange) {
+    <div class="col-auto">
+      <label class="form-label" for="metadata-usage-start">{{ 'otcloud.metadata-usage.start-date' | translate }}</label>
+      <input id="metadata-usage-start" class="form-control" placeholder="yyyy-mm-dd" formControlName="startDate"
+        ngbDatepicker #metadataUsageDStart="ngbDatepicker" (click)="metadataUsageDStart.toggle()">
+    </div>
+    <div class="col-auto">
+      <label class="form-label" for="metadata-usage-end">{{ 'otcloud.metadata-usage.end-date' | translate }}</label>
+      <input id="metadata-usage-end" class="form-control" placeholder="yyyy-mm-dd" formControlName="endDate"
+        ngbDatepicker #metadataUsageDEnd="ngbDatepicker" (click)="metadataUsageDEnd.toggle()">
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-primary" type="submit" [disabled]="isLoading">
+        {{ 'otcloud.metadata-usage.apply' | translate }}
+      </button>
+    </div>
+    }
+    <div class="col-auto ms-auto">
+      <button class="btn btn-outline-primary" type="button" (click)="downloadCSV()"
+        [disabled]="isLoading || rows.length === 0">
+        {{ 'otcloud.metadata-usage.export-csv' | translate }}
+      </button>
+    </div>
+  </form>
+
+  @if (errorMessage) {
+  <div class="alert alert-danger">{{ errorMessage }}</div>
+  }
+
+  @if (isLoading) {
+  <div class="d-flex align-items-center gap-2 my-3">
+    <div class="spinner-border spinner-border-sm" role="status"></div>
+    <span>{{ 'otcloud.metadata-usage.loading' | translate }}</span>
+  </div>
+  } @else if (noData) {
+  <div class="alert alert-info">{{ 'otcloud.metadata-usage.no-data' | translate }}</div>
+  } @else {
+  <div class="table-responsive">
+    <table class="table table-striped table-hover align-middle">
+      <thead>
+        <tr>
+          <th scope="col">{{ 'otcloud.metadata-usage.table.value' | translate }}</th>
+          <th scope="col" class="text-end">{{ 'otcloud.metadata-usage.table.items' | translate }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of rows; track row.id) {
+        <tr>
+          <td>{{ row.value }}</td>
+          <td class="text-end">{{ row.items }}</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <div class="d-flex flex-wrap align-items-center justify-content-between gap-2">
+    <div class="text-muted">
+      {{ 'otcloud.metadata-usage.total' | translate: { count: totalElements } }}
+    </div>
+
+    <div class="d-flex align-items-center gap-2">
+      <label class="form-label mb-0" for="metadata-usage-size">
+        {{ 'otcloud.metadata-usage.page-size' | translate }}
+      </label>
+      <select id="metadata-usage-size" class="form-select form-select-sm w-auto" [value]="pageSize"
+        (change)="onPageSizeChange($event)">
+        <option [value]="10">10</option>
+        <option [value]="20">20</option>
+        <option [value]="50">50</option>
+        <option [value]="100">100</option>
+      </select>
+    </div>
+
+    @if (totalPages > 1) {
+    <nav aria-label="Metadata usage pagination">
+      <ul class="pagination pagination-sm mb-0">
+        <li class="page-item" [class.disabled]="currentPage === 0">
+          <button class="page-link" type="button" (click)="onPageChange(currentPage - 1)">&laquo;</button>
+        </li>
+        @for (page of getPagesArray(); track page) {
+        <li class="page-item" [class.active]="page === currentPage">
+          <button class="page-link" type="button" (click)="onPageChange(page)">{{ page + 1 }}</button>
+        </li>
+        }
+        <li class="page-item" [class.disabled]="currentPage >= totalPages - 1">
+          <button class="page-link" type="button" (click)="onPageChange(currentPage + 1)">&raquo;</button>
+        </li>
+      </ul>
+    </nav>
+    }
+  </div>
+  }
+</div>

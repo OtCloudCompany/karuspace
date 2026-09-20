@@ -1,0 +1,12 @@
+.metadata-usage {
+  padding-top: var(--bs-spacer, 1rem);
+  padding-bottom: var(--bs-spacer, 1rem);
+
+  table {
+    th.text-end,
+    td.text-end {
+      width: 1%;
+      white-space: nowrap;
+    }
+  }
+}

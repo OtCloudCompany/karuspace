@@ -57,7 +57,11 @@ import { TruncatableComponent } from 'src/app/shared/truncatable/truncatable.com
 import { TruncatablePartComponent } from 'src/app/shared/truncatable/truncatable-part/truncatable-part.component';
 import { VarDirective } from 'src/app/shared/utils/var.directive';
 
+import { UsageStatisticsComponent } from 'src/themes/kubuni/app/otcloud-apps/usage-statistics/usage-statistics.component';
+
+import { CitationGeneratorComponent } from '../../../kubuni-apps/citation-generator/citation-generator.component';
 import { UsageMetricsComponent } from '../../../kubuni-apps/usage-metrics/usage-metrics.component';
+import { StripLineBreaksPipe } from '../../../strip-line-breaks.pipe';
 
 @listableObjectComponent('GraduationBooklet', ViewMode.StandalonePage, Context.Any, 'kubuni')
 @Component({
@@ -65,6 +69,7 @@ import { UsageMetricsComponent } from '../../../kubuni-apps/usage-metrics/usage-
   standalone: true,
   imports: [
     AsyncPipe,
+    CitationGeneratorComponent,
     CollectionsComponent,
     GenericItemPageFieldComponent,
     ItemPageDateFieldComponent,
@@ -74,6 +79,7 @@ import { UsageMetricsComponent } from '../../../kubuni-apps/usage-metrics/usage-
     NgIf,
     PdfJsViewerModule,
     RouterLink,
+    StripLineBreaksPipe,
     ThemedFileSectionComponent,
     ThemedItemPageTitleFieldComponent,
     ThemedLoadingComponent,
@@ -83,6 +89,7 @@ import { UsageMetricsComponent } from '../../../kubuni-apps/usage-metrics/usage-
     TruncatableComponent,
     TruncatablePartComponent,
     UsageMetricsComponent,
+    UsageStatisticsComponent,
     VarDirective,
   ],
   templateUrl: './graduation-booklet.component.html',

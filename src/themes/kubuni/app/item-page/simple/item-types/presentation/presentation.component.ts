@@ -24,6 +24,7 @@ import { ThemedThumbnailComponent } from 'src/app/thumbnail/themed-thumbnail.com
 
 import { UsageMetricsComponent } from '../../../kubuni-apps/usage-metrics/usage-metrics.component';
 import { UsageStatisticsComponent } from 'src/themes/kubuni/app/otcloud-apps/usage-statistics/usage-statistics.component';
+import { CitationGeneratorComponent } from '../../../kubuni-apps/citation-generator/citation-generator.component';
 import { StripLineBreaksPipe } from '../../../strip-line-breaks.pipe';
 import {UntypedItemComponent as BaseComponent } from 'src/app/item-page/simple/item-types/untyped-item/untyped-item.component';
 
@@ -31,7 +32,7 @@ import {UntypedItemComponent as BaseComponent } from 'src/app/item-page/simple/i
 @Component({
   selector: 'ds-presentation',
   standalone: true,
-  imports: [AsyncPipe,
+  imports: [CitationGeneratorComponent, AsyncPipe,
     CollectionsComponent,
     DsoEditMenuComponent,
     GenericItemPageFieldComponent,

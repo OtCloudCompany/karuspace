@@ -1,0 +1,89 @@
+<div class="container px-0 impact-dashboard">
+  <div class="mb-4">
+    <h1 class="h3 mb-1">{{ 'otcloud.impact-dashboard.title' | translate }}</h1>
+    <p class="text-muted mb-0">{{ 'otcloud.impact-dashboard.description' | translate }}</p>
+  </div>
+
+  <form [formGroup]="filterForm" (ngSubmit)="onSubmit()"
+    class="row g-2 align-items-end mb-4 p-3 bg-light rounded border impact-dashboard-filter">
+    <div class="col-auto">
+      <label class="form-label small fw-semibold mb-1" for="impact-dashboard-start">
+        {{ 'otcloud.impact-dashboard.start-date' | translate }}
+      </label>
+      <input id="impact-dashboard-start" class="form-control" placeholder="yyyy-mm-dd" formControlName="startDate"
+        ngbDatepicker #impactDashboardDStart="ngbDatepicker" (click)="impactDashboardDStart.toggle()">
+    </div>
+    <div class="col-auto">
+      <label class="form-label small fw-semibold mb-1" for="impact-dashboard-end">
+        {{ 'otcloud.impact-dashboard.end-date' | translate }}
+      </label>
+      <input id="impact-dashboard-end" class="form-control" placeholder="yyyy-mm-dd" formControlName="endDate"
+        ngbDatepicker #impactDashboardDEnd="ngbDatepicker" (click)="impactDashboardDEnd.toggle()">
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-primary" type="submit">
+        <i class="fas fa-filter me-1"></i>{{ 'otcloud.impact-dashboard.apply' | translate }}
+      </button>
+    </div>
+  </form>
+
+  @if (isLoadingSite) {
+  <div class="d-flex align-items-center gap-2 my-4">
+    <div class="spinner-border spinner-border-sm" role="status"></div>
+    <span>{{ 'otcloud.impact-dashboard.loading' | translate }}</span>
+  </div>
+  } @else {
+  <!-- Headline figures -->
+  <ds-repository-summary class="d-block mb-4" [siteUuid]="siteUuid"
+    [externalDateRange]="externalDateRange"></ds-repository-summary>
+
+  <!-- Most viewed items -->
+  <section class="mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <h2 class="h5 mb-0">{{ 'otcloud.impact-dashboard.top-viewed-title' | translate }}</h2>
+      <a class="small" [routerLink]="['/top-viewed']">
+        {{ 'otcloud.impact-dashboard.view-full-report' | translate }}
+      </a>
+    </div>
+    <ds-top-items [metric]="'views'" [limit]="5" [externalDateRange]="externalDateRange"></ds-top-items>
+  </section>
+
+  <!-- Most downloaded items -->
+  <section class="mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <h2 class="h5 mb-0">{{ 'otcloud.impact-dashboard.top-downloaded-title' | translate }}</h2>
+      <a class="small" [routerLink]="['/top-downloaded']">
+        {{ 'otcloud.impact-dashboard.view-full-report' | translate }}
+      </a>
+    </div>
+    <ds-top-items [metric]="'downloads'" [limit]="5" [externalDateRange]="externalDateRange"></ds-top-items>
+  </section>
+
+  <!-- Top authors -->
+  <section class="mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <h2 class="h5 mb-0">{{ 'otcloud.impact-dashboard.top-authors-title' | translate }}</h2>
+      <a class="small" [routerLink]="['/metadata-usage']" [queryParams]="{ field: 'author' }">
+        {{ 'otcloud.impact-dashboard.view-full-report' | translate }}
+      </a>
+    </div>
+    <!-- No uuid: a Site uuid is not a resolvable Discovery scope, and this panel is repository-wide -->
+    <ds-metadata-usage [lockField]="'author'"
+      [externalDateRange]="externalDateRange"></ds-metadata-usage>
+  </section>
+
+  <!-- Items added per staff member - only when the workflow-statistics visibility setting
+       (checked via the canViewWorkflowStatistics authorization feature) allows it -->
+  @if (canViewStaffActivity) {
+  <section class="mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <h2 class="h5 mb-0">{{ 'otcloud.impact-dashboard.staff-activity-title' | translate }}</h2>
+      <a class="small" [routerLink]="['/staff-activity']">
+        {{ 'otcloud.impact-dashboard.view-full-report' | translate }}
+      </a>
+    </div>
+    <ds-staff-activity></ds-staff-activity>
+  </section>
+  }
+  }
+</div>

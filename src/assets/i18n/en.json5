@@ -3158,6 +3158,176 @@
 
   "item.page.uri": "URI",
 
+  "item.page.issn": "ISSN",
+
+  "item.page.ispartof": "Is part of",
+
+  "item.page.rights": "Rights",
+
+  "otcloud.impact-dashboard.top-viewed-title": "Most viewed items",
+
+  "otcloud.impact-dashboard.top-downloaded-title": "Most downloaded items",
+
+  "otcloud.top-items.start-date": "Start date",
+
+  "otcloud.top-items.end-date": "End date",
+
+  "otcloud.top-items.apply": "Apply",
+
+  "otcloud.top-items.export-csv": "Export CSV",
+
+  "otcloud.top-items.capped": "Ranked over the {{ checked }} most recently added of {{ total }} items in this period. Narrow the date range for a complete ranking.",
+
+  "otcloud.top-items.total": "{{ count }} item(s) ranked",
+
+  "otcloud.top-items.table.item": "Item",
+
+  "otcloud.top-items.views.title": "Most Viewed Items",
+
+  "otcloud.top-items.views.description": "Items ranked by the number of views they received in the selected period.",
+
+  "otcloud.top-items.views.column": "Views",
+
+  "otcloud.top-items.views.loading": "Collecting view counts for {{ count }} item(s)...",
+
+  "otcloud.top-items.views.no-data": "No items with recorded views in this period.",
+
+  "otcloud.top-items.downloads.title": "Most Downloaded Items",
+
+  "otcloud.top-items.downloads.description": "Items ranked by the number of file downloads they received in the selected period.",
+
+  "otcloud.top-items.downloads.column": "Downloads",
+
+  "otcloud.top-items.downloads.loading": "Collecting download counts for {{ count }} item(s)...",
+
+  "otcloud.top-items.downloads.no-data": "No items with recorded downloads in this period.",
+
+  "otcloud.repository-summary.views": "Views in period",
+
+  "otcloud.repository-summary.items": "Items",
+
+  "otcloud.repository-summary.items-in-period": "Items issued in period",
+
+  "otcloud.repository-summary.countries": "Countries reached",
+
+  "otcloud.repository-summary.open-access": "Open access items",
+
+  "otcloud.repository-summary.full-text": "Items with full text",
+
+  "otcloud.repository-summary.percent-of-items": "{{ percent }}% of all items",
+
+  "otcloud.impact-dashboard.title": "Repository Impact Dashboard",
+
+  "otcloud.impact-dashboard.description": "See how the repository is being used: the most viewed and downloaded items, the authors whose work gets the most attention, and (where visible) how much each staff member has contributed - all over a date range you choose.",
+
+  "otcloud.impact-dashboard.start-date": "Start date",
+
+  "otcloud.impact-dashboard.end-date": "End date",
+
+  "otcloud.impact-dashboard.apply": "Apply",
+
+  "otcloud.impact-dashboard.loading": "Loading impact dashboard...",
+
+  "otcloud.impact-dashboard.top-authors-title": "Top authors",
+
+  "otcloud.impact-dashboard.staff-activity-title": "Items added by staff",
+
+  "otcloud.impact-dashboard.view-full-report": "View full report",
+
+  "otcloud.staff-activity.title": "Staff Activity",
+
+  "otcloud.staff-activity.description": "Items created, edited or deleted by each staff member. Counts are of distinct objects, not of audit records. Work done from the command line or by a scheduled process is recorded without a user, and is grouped separately below.",
+
+  "otcloud.staff-activity.start-date": "Start date",
+
+  "otcloud.staff-activity.end-date": "End date",
+
+  "otcloud.staff-activity.apply": "Apply",
+
+  "otcloud.staff-activity.reset": "Reset",
+
+  "otcloud.staff-activity.export-csv": "Export CSV",
+
+  "otcloud.staff-activity.loading": "Loading staff activity...",
+
+  "otcloud.staff-activity.no-data": "No staff activity recorded for this period. If this is unexpected, check that auditing is enabled on the server (audit.enabled).",
+
+  "otcloud.staff-activity.total-items-created": "{{ count }} item(s) added to the repository in this period",
+
+  "otcloud.staff-activity.total": "{{ count }} staff member(s)",
+
+  "otcloud.staff-activity.page-size": "Per page",
+
+  "otcloud.staff-activity.table.staff": "Staff member",
+
+  "otcloud.staff-activity.table.created": "Created",
+
+  "otcloud.staff-activity.table.edited": "Edited",
+
+  "otcloud.staff-activity.table.deleted": "Deleted",
+
+  "otcloud.staff-activity.table.files": "Files added",
+
+  "otcloud.staff-activity.table.records": "Audit records",
+
+  "otcloud.staff-activity.truncated": "This period holds more audit activity than can be read in one pass, so only the most recent {{ scanned }} records were analysed and the counts below understate the period. Narrow the date range for complete figures.",
+
+  "otcloud.staff-activity.records-scanned": "{{ count }} audit record(s) analysed",
+
+  "otcloud.staff-activity.unattributed": "Unattributed (batch or scheduled process)",
+
+  "otcloud.staff-activity.unattributed-hint": "Recorded without a signed-in user, e.g. a command-line import, media filter or curation task",
+
+  "otcloud.metadata-usage.title": "Usage by Metadata Field",
+
+  "otcloud.metadata-usage.field": "Group by",
+
+  "otcloud.metadata-usage.field.author": "Author",
+
+  "otcloud.metadata-usage.field.subject": "Subject",
+
+  "otcloud.metadata-usage.field.type": "Type",
+
+  "otcloud.metadata-usage.field.publisher": "Publisher",
+
+  "otcloud.metadata-usage.field.language": "Language",
+
+  "otcloud.metadata-usage.heading.author": "Top Authors",
+
+  "otcloud.metadata-usage.heading.subject": "Top Subjects",
+
+  "otcloud.metadata-usage.heading.type": "Top Item Types",
+
+  "otcloud.metadata-usage.heading.publisher": "Top Publishers",
+
+  "otcloud.metadata-usage.heading.language": "Top Languages",
+
+  "otcloud.metadata-usage.start-date": "Start date",
+
+  "otcloud.metadata-usage.end-date": "End date",
+
+  "otcloud.metadata-usage.apply": "Apply",
+
+  "otcloud.metadata-usage.export-csv": "Export CSV",
+
+  "otcloud.metadata-usage.loading": "Loading usage by metadata...",
+
+  "otcloud.metadata-usage.no-data": "No usage recorded for this metadata field.",
+
+  "otcloud.metadata-usage.truncated": "These figures cover the {{ count }} most viewed items in scope, not every item, so they are a lower bound rather than repository-wide totals. Raise otcloud-statistics.metadata-table.max-items on the server for more complete figures.",
+
+  "otcloud.metadata-usage.total": "{{ count }} value(s)",
+
+  "otcloud.metadata-usage.page-size": "Per page",
+
+  "otcloud.metadata-usage.table.value": "Value",
+
+  "otcloud.metadata-usage.table.views": "Views",
+
+  "otcloud.metadata-usage.table.downloads": "Downloads",
+
+  "otcloud.metadata-usage.table.items": "Items",
+
   "item.page.bitstreams.view-more": "Show more",
 
   "item.page.bitstreams.collapse": "Collapse",
@@ -8059,4 +8229,12 @@
   "subscriptions.unsubscribe": "Unsubscribe",
 
   "browse.search-form.placeholder": "Search the repository",
+
+  "item.page.stats.country": "Top 10 Countries",
+
+  "item.page.stats.city": "Top 10 Cities",
+
+  "item.page.views": "Views",
+
+  "graduationbooklet.page.titleprefix": "Graduation Booklet",
 }

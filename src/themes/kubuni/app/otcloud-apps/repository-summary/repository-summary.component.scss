@@ -1,0 +1,30 @@
+.repository-summary {
+  .summary-card {
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+
+    .card-body {
+      padding: 1rem 0.75rem;
+      text-align: center;
+    }
+  }
+
+  .summary-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .summary-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--bs-secondary, #6c757d);
+  }
+
+  .summary-sub {
+    font-size: 0.7rem;
+    margin-top: 0.15rem;
+    color: var(--bs-secondary, #6c757d);
+  }
+}

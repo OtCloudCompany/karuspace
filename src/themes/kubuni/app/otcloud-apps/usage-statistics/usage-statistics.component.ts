@@ -7,10 +7,16 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import worldMap from '@highcharts/map-collection/custom/world.geo.json';
-import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbNav,
+  NgbNavContent,
+  NgbNavItem,
+  NgbNavLink,
+  NgbNavOutlet,
+} from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { UsageReport } from 'src/app/core/statistics/models/usage-report.model';
-import * as Highcharts from 'highcharts';
+import type * as Highcharts from 'highcharts';
 import { RouteService } from 'src/app/core/services/route.service';
 import { Router } from '@angular/router';
 import { HighchartsService } from '../highcharts-service';
@@ -23,7 +29,19 @@ import { DSpaceObject } from '@dspace/core/shared/dspace-object.model';
 
 @Component({
   selector: 'ds-usage-statistics',
-  imports: [CommonModule, NgbNavModule, TranslateModule, HighchartsChartModule],
+  // The individual nav directives, not NgbNavModule: the module also exports
+  // NgbNavLinkBase, whose bare [ngbNavLink] selector then matches alongside the
+  // copy NgbNavLink already applies as a host directive (NG0309).
+  imports: [
+    CommonModule,
+    NgbNav,
+    NgbNavContent,
+    NgbNavItem,
+    NgbNavLink,
+    NgbNavOutlet,
+    TranslateModule,
+    HighchartsChartModule,
+  ],
   templateUrl: './usage-statistics.component.html',
   styleUrl: './usage-statistics.component.scss',
 })

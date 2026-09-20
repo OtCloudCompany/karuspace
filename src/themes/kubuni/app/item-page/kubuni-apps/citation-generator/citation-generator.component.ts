@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {Cite, plugins} from '@citation-js/core';
 import '@citation-js/plugin-csl';
-import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { DSpaceObject } from 'src/app/core/shared/dspace-object.model';
 import {

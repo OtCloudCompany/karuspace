@@ -8,6 +8,7 @@ import { authenticatedGuard } from '@dspace/core/auth/authenticated.guard';
 import { groupAdministratorGuard } from '@dspace/core/data/feature-authorization/feature-authorization-guard/group-administrator.guard';
 import { siteAdministratorGuard } from '@dspace/core/data/feature-authorization/feature-authorization-guard/site-administrator.guard';
 import { siteRegisterGuard } from '@dspace/core/data/feature-authorization/feature-authorization-guard/site-register.guard';
+import { workflowStatisticsGuard } from '@dspace/core/data/feature-authorization/feature-authorization-guard/workflow-statistics.guard';
 import { endUserAgreementCurrentUserGuard } from '@dspace/core/end-user-agreement/end-user-agreement-current-user.guard';
 import { reloadGuard } from '@dspace/core/reload/reload.guard';
 import { forgotPasswordCheckGuard } from '@dspace/core/rest-property/forgot-password-check-guard.guard';
@@ -47,6 +48,7 @@ import { PROCESS_MODULE_PATH } from './process-page/process-page-routing.paths';
 import { viewTrackerResolver } from './statistics/angulartics/dspace/view-tracker.resolver';
 import { provideSubmissionState } from './submission/provide-submission-state';
 import { SUGGESTION_MODULE_PATH } from './suggestions-page/suggestions-page-routing-paths';
+import { reportDsoResolver } from '../themes/kubuni/app/otcloud-apps/report-dso.resolver';
 
 export const APP_ROUTES: Route[] = [
   { path: INTERNAL_SERVER_ERROR, component: ThemedPageInternalServerErrorComponent, data: { title: '500.page-internal-server-error' } },
@@ -259,6 +261,46 @@ export const APP_ROUTES: Route[] = [
         loadChildren: () => import('./statistics-page/statistics-page-routes')
           .then((m) => m.ROUTES),
         canActivate: [endUserAgreementCurrentUserGuard],
+      },
+      {
+        path: 'impact-dashboard',
+        loadComponent: () => import('../themes/kubuni/app/otcloud-apps/impact-dashboard/impact-dashboard.component')
+          .then((m) => m.ImpactDashboardComponent),
+        canActivate: [endUserAgreementCurrentUserGuard],
+      },
+      {
+        // `metric` is bound to the component's input by withComponentInputBinding()
+        path: 'top-viewed',
+        loadComponent: () => import('../themes/kubuni/app/otcloud-apps/top-items/top-items.component')
+          .then((m) => m.TopItemsComponent),
+        data: { metric: 'views' },
+        canActivate: [endUserAgreementCurrentUserGuard],
+      },
+      {
+        path: 'top-downloaded',
+        loadComponent: () => import('../themes/kubuni/app/otcloud-apps/top-items/top-items.component')
+          .then((m) => m.TopItemsComponent),
+        data: { metric: 'downloads' },
+        canActivate: [endUserAgreementCurrentUserGuard],
+      },
+      {
+        path: 'metadata-usage',
+        loadComponent: () => import('../themes/kubuni/app/otcloud-apps/metadata-usage/metadata-usage.component')
+          .then((m) => m.MetadataUsageComponent),
+        canActivate: [endUserAgreementCurrentUserGuard],
+      },
+      {
+        path: 'metadata-usage/:uuid',
+        loadComponent: () => import('../themes/kubuni/app/otcloud-apps/metadata-usage/metadata-usage.component')
+          .then((m) => m.MetadataUsageComponent),
+        resolve: { dso: reportDsoResolver },
+        canActivate: [endUserAgreementCurrentUserGuard],
+      },
+      {
+        path: 'staff-activity',
+        loadComponent: () => import('../themes/kubuni/app/otcloud-apps/staff-activity/staff-activity.component')
+          .then((m) => m.StaffActivityComponent),
+        canActivate: [workflowStatisticsGuard, endUserAgreementCurrentUserGuard],
       },
       {
         path: HEALTH_PAGE_PATH,

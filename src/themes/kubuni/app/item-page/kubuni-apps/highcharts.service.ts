@@ -18,23 +18,26 @@ export class HighchartsService {
     }
 
     private async initHighcharts(): Promise<void> {
+        // Import the ESM builds, not the default UMD ones: the UMD module bundles
+        // (highcharts/modules/*) read Highcharts off `window._Highcharts`, which a
+        // bundler never sets, so they throw while initialising. The ESM builds
+        // under highcharts/esm import the Highcharts instance themselves and
+        // register against it on load, so they must not be applied as functions.
         const [
             Highcharts,
-            MapModule,
-            ExportingModule,
             worldMap,
         ] = await Promise.all([
-            import('highcharts'),
-            import('highcharts/modules/map'),
-            import('highcharts/modules/exporting'),
+            import('highcharts/esm/highcharts'),
             import('@highcharts/map-collection/custom/world.geo.json'),
+            import('highcharts/esm/modules/map'),
+            import('highcharts/esm/modules/exporting'),
         ]);
 
-        (MapModule as any).default(Highcharts.default);
-        (ExportingModule as any).default(Highcharts.default);
-        (Highcharts.default as any).maps['custom/world'] = worldMap.default;
+        const highcharts = (Highcharts as any).default;
+        // `maps` is added by the map module, so this has to come after it loads.
+        highcharts.maps['custom/world'] = (worldMap as any).default ?? worldMap;
 
-        this._highcharts = Highcharts.default;
+        this._highcharts = highcharts;
     }
 
     async getHighcharts(): Promise<any> {

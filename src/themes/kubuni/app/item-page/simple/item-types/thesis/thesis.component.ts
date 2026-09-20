@@ -28,6 +28,7 @@ import { ThemedThumbnailComponent } from 'src/app/thumbnail/themed-thumbnail.com
 
 import { UsageMetricsComponent } from '../../../kubuni-apps/usage-metrics/usage-metrics.component';
 import { UsageStatisticsComponent } from 'src/themes/kubuni/app/otcloud-apps/usage-statistics/usage-statistics.component';
+import { CitationGeneratorComponent } from '../../../kubuni-apps/citation-generator/citation-generator.component';
 import { StripLineBreaksPipe } from '../../../strip-line-breaks.pipe';
 
 @listableObjectComponent('Thesis', ViewMode.StandalonePage, Context.Any, 'kubuni')
@@ -36,7 +37,7 @@ import { StripLineBreaksPipe } from '../../../strip-line-breaks.pipe';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    AsyncPipe,
+    CitationGeneratorComponent, AsyncPipe,
     CollectionsComponent,
     DsoEditMenuComponent,
     GenericItemPageFieldComponent,
